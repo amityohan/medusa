@@ -31,4 +31,14 @@ describe("getUnfulfilledItemTotals", () => {
       })
     ).toEqual({ quantity: 1, total: 12.34 })
   })
+
+  it("returns zero totals when the item is fully fulfilled", () => {
+    expect(
+      getUnfulfilledItemTotals({
+        quantity: 2,
+        fulfilledQuantity: 2,
+        unitPrice: 449,
+      })
+    ).toEqual({ quantity: 0, total: 0 })
+  })
 })

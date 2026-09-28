@@ -29,6 +29,7 @@ import { useStockLocation } from "../../../../../hooks/api/stock-locations"
 import { formatProvider } from "../../../../../lib/format-provider"
 import { getLocaleAmount } from "../../../../../lib/money-amount-helpers"
 import { FulfillmentSetType } from "../../../../locations/common/constants"
+import { getUnfulfilledItemTotals } from "./get-unfulfilled-item-totals"
 import { ExtendedOrderFulfillment, ExtendedOrder } from "../../constants"
 
 type OrderFulfillmentSectionProps = {
@@ -57,6 +58,12 @@ const UnfulfilledItem = ({
   item: AdminOrderLineItem
   currencyCode: string
 }) => {
+  const { quantity: unfulfilledQuantity } = getUnfulfilledItemTotals({
+    quantity: item.quantity,
+    fulfilledQuantity: item.detail.fulfilled_quantity,
+    unitPrice: item.unit_price,
+  })
+
   return (
     <div
       key={item.id}
@@ -93,14 +100,14 @@ const UnfulfilledItem = ({
         <div className="flex items-center justify-end">
           <Text>
             <span className="tabular-nums">
-              {item.quantity - item.detail.fulfilled_quantity}
+              {unfulfilledQuantity}
             </span>
             x
           </Text>
         </div>
         <div className="flex items-center justify-end">
           <Text size="small">
-            {getLocaleAmount((item.subtotal as number) || 0, currencyCode)}
+            {getLocaleAmount(item.unit_price * unfulfilledQuantity, currencyCode)}
           </Text>
         </div>
       </div>

@@ -21,4 +21,14 @@ describe("getUnfulfilledItemTotals", () => {
       })
     ).toEqual({ quantity: 1, total: 449 })
   })
+
+  it("preserves fractional unit prices in the remaining total", () => {
+    expect(
+      getUnfulfilledItemTotals({
+        quantity: 3,
+        fulfilledQuantity: 2,
+        unitPrice: 12.34,
+      })
+    ).toEqual({ quantity: 1, total: 12.34 })
+  })
 })

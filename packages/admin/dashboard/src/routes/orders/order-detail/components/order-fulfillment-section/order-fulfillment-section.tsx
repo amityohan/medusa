@@ -60,9 +60,9 @@ const UnfulfilledItem = ({
 }) => {
   const { quantity: unfulfilledQuantity, total: unfulfilledTotal } =
     getUnfulfilledItemTotals({
-    quantity: item.quantity,
-    fulfilledQuantity: item.detail.fulfilled_quantity,
-    unitPrice: item.unit_price,
+      quantity: item.quantity,
+      fulfilledQuantity: item.detail.fulfilled_quantity,
+      unitPrice: item.unit_price,
     })
 
   return (
@@ -100,10 +100,7 @@ const UnfulfilledItem = ({
         </div>
         <div className="flex items-center justify-end">
           <Text>
-            <span className="tabular-nums">
-              {unfulfilledQuantity}
-            </span>
-            x
+            <span className="tabular-nums">{unfulfilledQuantity}</span>x
           </Text>
         </div>
         <div className="flex items-center justify-end">

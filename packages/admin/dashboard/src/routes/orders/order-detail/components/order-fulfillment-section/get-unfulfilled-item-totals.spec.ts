@@ -41,4 +41,14 @@ describe("getUnfulfilledItemTotals", () => {
       })
     ).toEqual({ quantity: 0, total: 0 })
   })
+
+  it("multiplies the unit price by multiple remaining units", () => {
+    expect(
+      getUnfulfilledItemTotals({
+        quantity: 4,
+        fulfilledQuantity: 1,
+        unitPrice: 20,
+      })
+    ).toEqual({ quantity: 3, total: 60 })
+  })
 })

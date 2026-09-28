@@ -58,11 +58,12 @@ const UnfulfilledItem = ({
   item: AdminOrderLineItem
   currencyCode: string
 }) => {
-  const { quantity: unfulfilledQuantity } = getUnfulfilledItemTotals({
+  const { quantity: unfulfilledQuantity, total: unfulfilledTotal } =
+    getUnfulfilledItemTotals({
     quantity: item.quantity,
     fulfilledQuantity: item.detail.fulfilled_quantity,
     unitPrice: item.unit_price,
-  })
+    })
 
   return (
     <div
@@ -107,7 +108,7 @@ const UnfulfilledItem = ({
         </div>
         <div className="flex items-center justify-end">
           <Text size="small">
-            {getLocaleAmount(item.unit_price * unfulfilledQuantity, currencyCode)}
+            {getLocaleAmount(unfulfilledTotal, currencyCode)}
           </Text>
         </div>
       </div>
